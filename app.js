@@ -1,8 +1,19 @@
-const arrow = require('./arrow-function.js')
-const util = require('./util.js')
+const express = require('express')
+const taskService = require('./service/task-service')
 
-//const tasksToDo = arrow.shortArrowFunction()
-//console.log(tasksToDo)
+const app = express()
 
-const note = util.readNote('qwertyui')
-console.log(note)
+app.get('/tasks', (req, res) => {
+    const priceParam = req.query.price
+    const result = taskService.findByPrice(parseInt(priceParam))
+    res.send(result)
+})
+
+app.get('/saveUser', (req, res) => {
+    const result = taskService.saveUser()
+    res.send(result)
+})
+
+app.listen(3000, () => {
+    console.log('Server is ip on port 3000')
+})
