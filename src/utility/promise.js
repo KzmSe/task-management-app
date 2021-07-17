@@ -1,5 +1,5 @@
-require('./db/mongoose')
-const User = require('./model/user')
+require('../db/mongoose')
+const User = require('../model/user')
 
 
 // User.findByIdAndUpdate("60ec3cb57618cfa9fbb5562c", {age: 1}).then((user) => {
@@ -16,6 +16,9 @@ const User = require('./model/user')
 const add = (a, b) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
+            if (a < 0 || b < 0) {
+                reject('Numbers must be greater than zero')
+            }
             resolve(a + b)
         }, 2000)
     })
